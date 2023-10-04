@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "db571d5df79d5df80d572e4be024dd8f",
+    "content-hash": "52a85ce664a40187950e38d8e47c1688",
     "packages": [
         {
             "name": "brick/math",
@@ -969,6 +969,90 @@
                 }
             ],
             "time": "2023-08-27T10:19:19+00:00"
+        },
+        {
+            "name": "intervention/image",
+            "version": "2.7.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Intervention/image.git",
+                "reference": "04be355f8d6734c826045d02a1079ad658322dad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Intervention/image/zipball/04be355f8d6734c826045d02a1079ad658322dad",
+                "reference": "04be355f8d6734c826045d02a1079ad658322dad",
+                "shasum": ""
+            },
+            "require": {
+                "ext-fileinfo": "*",
+                "guzzlehttp/psr7": "~1.1 || ^2.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9.2",
+                "phpunit/phpunit": "^4.8 || ^5.7 || ^7.5.15"
+            },
+            "suggest": {
+                "ext-gd": "to use GD library based image processing.",
+                "ext-imagick": "to use Imagick based image processing.",
+                "intervention/imagecache": "Caching extension for the Intervention Image library"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.4-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Intervention\\Image\\ImageServiceProvider"
+                    ],
+                    "aliases": {
+                        "Image": "Intervention\\Image\\Facades\\Image"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Intervention\\Image\\": "src/Intervention/Image"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oliver Vogel",
+                    "email": "oliver@intervention.io",
+                    "homepage": "https://intervention.io/"
+                }
+            ],
+            "description": "Image handling and manipulation library with support for Laravel integration",
+            "homepage": "http://image.intervention.io/",
+            "keywords": [
+                "gd",
+                "image",
+                "imagick",
+                "laravel",
+                "thumbnail",
+                "watermark"
+            ],
+            "support": {
+                "issues": "https://github.com/Intervention/image/issues",
+                "source": "https://github.com/Intervention/image/tree/2.7.2"
+            },
+            "funding": [
+                {
+                    "url": "https://paypal.me/interventionio",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/Intervention",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-05-21T17:30:32+00:00"
         },
         {
             "name": "laravel/framework",
@@ -8001,6 +8085,68 @@
                 }
             ],
             "time": "2023-08-23T06:24:34+00:00"
+        },
+        {
+            "name": "sven/artisan-view",
+            "version": "v3.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/svenluijten/artisan-view.git",
+                "reference": "a6e3a374a093278946114cb38e69678ffdf7119e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/svenluijten/artisan-view/zipball/a6e3a374a093278946114cb38e69678ffdf7119e",
+                "reference": "a6e3a374a093278946114cb38e69678ffdf7119e",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^8.0 || ^9.0 || ^10.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "graham-campbell/testbench": "^5.6",
+                "mockery/mockery": "^1.4",
+                "phpunit/phpunit": "^9.0 || ^10.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Sven\\ArtisanView\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sven\\ArtisanView\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sven Luijten",
+                    "email": "contact@svenluijten.com",
+                    "homepage": "https://svenluijten.com"
+                }
+            ],
+            "description": "Manage your views in Laravel projects through artisan",
+            "keywords": [
+                "artisan",
+                "blade",
+                "laravel",
+                "templates",
+                "views"
+            ],
+            "support": {
+                "issues": "https://github.com/svenluijten/artisan-view/issues",
+                "source": "https://github.com/svenluijten/artisan-view/tree/v3.6.0"
+            },
+            "abandoned": "laravel/framework",
+            "time": "2023-03-03T19:11:26+00:00"
         },
         {
             "name": "symfony/yaml",

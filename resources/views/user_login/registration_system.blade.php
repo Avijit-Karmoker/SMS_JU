@@ -39,10 +39,10 @@
                                 <div class="border p-4 rounded">
                                     <div class="text-center">
                                         <h3 class="">Sign Up</h3>
-                                        <p>Already have an account? <a href="{{ route('login') }}">Login here</a>
+                                        <p>Already have an account? <a href="{{ route('login.index') }}">Login here</a>
                                         </p>
                                     </div>
-                                    <div class="d-grid">
+                                    {{-- <div class="d-grid">
                                         <a class="btn my-4 shadow-sm btn-white" href="javascript:;"> <span
                                                 class="d-flex justify-content-center align-items-center">
                                                 <img class="me-2"
@@ -55,14 +55,19 @@
                                     </div>
                                     <div class="login-separater text-center mb-4"> <span>OR SIGN UP WITH EMAIL</span>
                                         <hr />
-                                    </div>
+                                    </div> --}}
                                     <div class="form-body">
-                                        <form class="row g-3" method="POST" action="{{ route('register') }}">
+                                        <form class="row g-3" method="POST" action="{{ route('login.store') }}">
                                             @csrf
                                             <div class="col-12">
                                                 <label for="inputFirstName" class="form-label">Full Name</label>
-                                                <input type="text" name="name" class="form-control" id="inputFirstName"
-                                                    placeholder="Jhon">
+                                                <input type="text" name="name" class="form-control" id="inputFirstName" placeholder="Jhon">
+                                                @error('name')
+                                                    <div class="alert alert-danger border-0 mt-3 bg-danger alert-dismissible fade show">
+                                                        <div class="text-white">{{ $message }}</div>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                    </div>
+                                                @enderror
                                             </div>
                                             <div class="col-12">
                                                 <label for="inputEmailAddress" class="form-label">Email Address</label>
@@ -77,7 +82,20 @@
                                             </div>
                                             <div class="col-12">
                                                 <label for="inputEmailAddress" class="form-label">Phone Number</label>
-                                                <input type="number" name="phone" class="form-control" id="inputEmailAddress" placeholder="Enter Phone Number">
+                                                <input type="text" name="phone" class="form-control" id="inputEmailAddress" placeholder="Enter Phone Number">
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="inputEmailAddress" class="form-label">Select Option</label>
+                                                <select class="form-select" aria-label="Default select example" name="role" onchange="myFunction()">
+                                                    <option value="student">Student</option>
+                                                    <option value="teacher">Teacher</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12 d-none" id="teacher">
+                                                <label for="inputChoosePassword" class="form-label">Teacher's ID</label>
+                                                <div class="input-group" id="show_hide_password">
+                                                    <input type="number" name="teacher_id" class="form-control" id="inputEmailAddress" placeholder="Enter Teacher ID">
+                                                </div>
                                             </div>
                                             <div class="col-12">
                                                 <label for="inputChoosePassword" class="form-label">Password</label>
@@ -115,6 +133,13 @@
     <script src="{{ asset('dashboard_assets') }}/plugins/simplebar/js/simplebar.min.js"></script>
     <script src="{{ asset('dashboard_assets') }}/plugins/metismenu/js/metisMenu.min.js"></script>
     <script src="{{ asset('dashboard_assets') }}/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+
+    <script>
+        function myFunction() {
+            var element = document.getElementById("teacher");
+            element.classList.toggle("d-none");
+        }
+    </script>
     <!--Password show & hide js -->
     <script>
         $(document).ready(function() {

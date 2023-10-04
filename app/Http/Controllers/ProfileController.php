@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Image;
 
 class ProfileController extends Controller
 {
@@ -56,5 +59,22 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function profile_photo_upload(Request $request)
+    {
+        $request->validate([
+            'profile_photo' => 'required|image',
+        ]);
+        $extention = $request->file('profile_photo')->getClientOriginalExtension();
+        $new_name = auth()->user()->name . "_" . auth()->id() . "_" . Carbon::now()->format('Y_m_d') . "." . $extention;
+        $img = Image::make($request->file('profile_photo'))->resize(110, 110);
+        $img->save(base_path('public/uploads/profile_photos/' . $new_name), 80);
+
+        User::find(Auth::id())->update([
+            'profile_photo' => $new_name
+        ]);
+
+        return back();
     }
 }
