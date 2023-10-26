@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\cr;
 use App\Models\Login;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -33,15 +34,15 @@ class LoginController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:logins,email'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'phone' => ['required'],
-        ]);
         if ($request->teacher_id == null) {
-            User::create([
+            $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:logins,email'],
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
+                'phone' => ['required'],
+            ]);
+
+            $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'phone' => $request->phone,
@@ -49,7 +50,28 @@ class LoginController extends Controller
                 'password' => Hash::make($request->password),
                 'role' => $request->role,
             ]);
-        };
+        }
+        else{
+            $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:logins,email'],
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
+                'phone' => ['required'],
+                'teacher_id' => ['required'],
+            ]);
+
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'teacher_id' => $request->teacher_id,
+                'password' => Hash::make($request->password),
+                'role' => $request->role,
+            ]);
+        }
+        event(new Registered($user));
+
+        Auth::login($user);
         return redirect('/user-dashboard');
     }
 
@@ -100,7 +122,7 @@ class LoginController extends Controller
         //     return redirect('user/login')->with('password_error', 'Password is incorrect or user not found');
         // }
 
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
             return redirect('/user-dashboard');
         } else {
             return redirect('user/login')->with('password_error', 'Password is incorrect or user not found');

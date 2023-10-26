@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
@@ -37,8 +38,17 @@ require __DIR__.'/auth.php';
 //student & teacher login
 Route::resource('/user/login', LoginController::class);
 
+//admin controller
+Route::get('/subject', [AdminController::class, 'subject'])->name('subject');
+Route::post('/subject/add', [AdminController::class, 'addSubject'])->name('subject.add');
+Route::get('/subject/show', [AdminController::class, 'showSubject'])->name('subject.show');
+
 //Student resource route
 // Route::resource('/student', StudentController::class);
 Route::post('/user-login', [LoginController::class, 'login'])->name('user.login');
-
 Route::get('/user-dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
+Route::post('/student/information', [StudentController::class, 'information'])->name('student.information');
+
+Route::get('/user-dashboard/subject', [StudentController::class, 'showSubject'])->name('user.dashboard.subject');
+Route::post('/subject/update', [StudentController::class, 'updateSubject'])->name('subject.update');
+

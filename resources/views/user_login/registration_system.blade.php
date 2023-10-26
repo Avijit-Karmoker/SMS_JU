@@ -82,7 +82,7 @@
                                             </div>
                                             <div class="col-12">
                                                 <label for="inputEmailAddress" class="form-label">Phone Number</label>
-                                                <input type="text" name="phone" class="form-control" id="inputEmailAddress" placeholder="Enter Phone Number">
+                                                <input type="tel" name="phone" class="form-control" id="inputEmailAddress" placeholder="Enter Phone Number">
                                             </div>
                                             <div class="col-12">
                                                 <label for="inputEmailAddress" class="form-label">Select Option</label>
@@ -94,7 +94,7 @@
                                             <div class="col-12 d-none" id="teacher">
                                                 <label for="inputChoosePassword" class="form-label">Teacher's ID</label>
                                                 <div class="input-group" id="show_hide_password">
-                                                    <input type="number" name="teacher_id" class="form-control" id="inputEmailAddress" placeholder="Enter Teacher ID">
+                                                    <input type="text" name="teacher_id" class="form-control" id="inputEmailAddress" placeholder="Enter Teacher ID">
                                                 </div>
                                             </div>
                                             <div class="col-12">

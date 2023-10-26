@@ -172,7 +172,7 @@
                                 </div>
                             </form>
                             <hr class="my-4">
-                            <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
+                            <form method="post" action="{{ route('password.update', Auth::user()->id) }}" class="mt-6 space-y-6">
                                 @csrf
                                 @method('put')
 
@@ -183,12 +183,6 @@
                                     <div class="col-sm-9 text-secondary">
                                         <input type="text" name="current_password" class="form-control"/>
                                     </div>
-                                    {{-- @if ($errors)
-                                        <div class="alert alert-danger border-0 bg-danger alert-dismissible fade show">
-                                            <div class="text-white">{{ messages="$errors->updatePassword->get('current_password')" }}</div>
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                        </div>
-                                    @endif --}}
                                 </div>
                                 <div class="row mt-3 mb-3">
                                     <div class="col-sm-3">
@@ -214,17 +208,6 @@
                                             <button type="submit" class="btn btn-primary px-4">Save Changes</button>
                                         </div>
                                     </div>
-                                    {{-- <x-primary-button>{{ __('Save') }}</x-primary-button> --}}
-
-                                    {{-- @if (session('status') === 'password-updated')
-                                        <p
-                                            x-data="{ show: true }"
-                                            x-show="show"
-                                            x-transition
-                                            x-init="setTimeout(() => show = false, 2000)"
-                                            class="text-sm text-gray-600 dark:text-gray-400"
-                                        >{{ __('Saved.') }}</p>
-                                    @endif --}}
                                 </div>
                             </form>
                             <hr class="my-4">
@@ -250,11 +233,104 @@
                             </form>
                         </div>
                     </div>
+
+                    @if (Auth::user()->role == 'student')
+                        <div class="card">
+                            <div class="card-body">
+                                <form method="POST" action="{{ route('student.information') }}">
+                                    @csrf
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Father's name</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <input type="text" name="father_name" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Mother's name</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <input type="text" name="mother_name" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Gender</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <select name="gender" id="" class="form-select">
+                                                <option value="male">Male</option>
+                                                <option value="female">Female</option>
+                                                <option value="others">Others</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Date of Birth</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <input type="date" name="date" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Student ID/Exam Roll</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <input type="text" name="student_id" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Present Address</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <input type="text" id="presentAddress" name="present_address" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Permanent Address</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <input type="text" id="permanentAddress" name="permanent_address" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0"></h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <input type="checkbox" id="copyAddressCheckbox"/> Present address same as parmanent address.
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Admission Date</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <input type="date" name="admission_date" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-3"></div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <button type="submit" class="btn btn-primary px-4">Save Changes</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 @endsection
 
 @section('footer-script')
@@ -278,4 +354,20 @@
     })
 </script>
 @endif
+<script>
+    document.getElementById('copyAddressCheckbox').addEventListener('change', function () {
+        // Get the present address textarea
+        var presentAddress = document.getElementById('presentAddress');
+
+        // Get the permanent address textarea
+        var permanentAddress = document.getElementById('permanentAddress');
+
+        // Copy the value if the checkbox is checked, otherwise clear the permanent address
+        if (this.checked) {
+            permanentAddress.value = presentAddress.value;
+        } else {
+            permanentAddress.value = '';
+        }
+    });
+</script>
 @endsection

@@ -66,8 +66,9 @@ class ProfileController extends Controller
         $request->validate([
             'profile_photo' => 'required|image',
         ]);
+        unlink(base_path('public/uploads/profile_photos/' . Auth::user()->profile_photo));
         $extention = $request->file('profile_photo')->getClientOriginalExtension();
-        $new_name = auth()->user()->name . "_" . auth()->id() . "_" . Carbon::now()->format('Y_m_d') . "." . $extention;
+        $new_name = auth()->user()->name . "_" . auth()->id() . "_" . Carbon::now()->format('Y_m_d') . "." .  $extention;
         $img = Image::make($request->file('profile_photo'))->resize(110, 110);
         $img->save(base_path('public/uploads/profile_photos/' . $new_name), 80);
 
