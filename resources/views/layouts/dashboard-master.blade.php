@@ -30,6 +30,7 @@
 	<link rel="stylesheet" href="{{ asset('dashboard_assets') }}/css/semi-dark.css" />
 	<link rel="stylesheet" href="{{ asset('dashboard_assets') }}/css/header-colors.css" />
     <link rel="stylesheet" href="sweetalert2.min.css">
+    @livewireStyles
 	<title>Rukada - Responsive Bootstrap 5 Admin Template</title>
 </head>
 
@@ -94,22 +95,12 @@
 					<a href="javascript:;" class="has-arrow">
 						<div class="parent-icon"><i class="bx bx-category"></i>
 						</div>
-						<div class="menu-title">Application</div>
+						<div class="menu-title">Attendence</div>
 					</a>
 					<ul>
-						<li> <a href="app-emailbox.html"><i class="bx bx-right-arrow-alt"></i>Email</a>
+						<li> <a href="{{ route('teacher.attendance') }}"><i class="bx bx-right-arrow-alt"></i>Take Attendence</a>
 						</li>
 						<li> <a href="app-chat-box.html"><i class="bx bx-right-arrow-alt"></i>Chat Box</a>
-						</li>
-						<li> <a href="app-file-manager.html"><i class="bx bx-right-arrow-alt"></i>File Manager</a>
-						</li>
-						<li> <a href="app-contact-list.html"><i class="bx bx-right-arrow-alt"></i>Contatcs</a>
-						</li>
-						<li> <a href="app-to-do.html"><i class="bx bx-right-arrow-alt"></i>Todo List</a>
-						</li>
-						<li> <a href="app-invoice.html"><i class="bx bx-right-arrow-alt"></i>Invoice</a>
-						</li>
-						<li> <a href="app-fullcalender.html"><i class="bx bx-right-arrow-alt"></i>Calendar</a>
 						</li>
 					</ul>
 				</li>
@@ -482,6 +473,7 @@
                                     @csrf
                                     <i class='bx bx-log-out-circle me-1 text-danger'></i>
                                     <a href="route('logout')" class="text-danger"
+                                    style="text-decoration: none;"
                                         onclick="event.preventDefault();
                                         this.closest('form').submit();">Log Out</a>
                                     </form>
@@ -631,7 +623,9 @@
 	<script>
 		new PerfectScrollbar('.dashboard-top-countries');
 	</script>
+    <script src="{{ mix('js/app.js') }}"></script>
     @yield('footer-script')
+    @livewireScripts
 </body>
 
 </html>

@@ -4,8 +4,10 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserDashboardController;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\SelectSubject;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,4 +53,8 @@ Route::post('/student/information', [StudentController::class, 'information'])->
 
 Route::get('/user-dashboard/subject', [StudentController::class, 'showSubject'])->name('user.dashboard.subject');
 Route::post('/subject/update', [StudentController::class, 'updateSubject'])->name('subject.update');
+
+//Teacher Controller
+Route::get('/teacher/attendance', [TeacherController::class, 'attendance'])->name('teacher.attendance');
+
 
