@@ -42,6 +42,8 @@ Route::resource('/user/login', LoginController::class);
 
 //admin controller
 Route::get('/subject', [AdminController::class, 'subject'])->name('subject');
+Route::post('/faculty/add', [AdminController::class, 'addFaculty'])->name('faculty.add');
+Route::post('/department/add', [AdminController::class, 'addDepartment'])->name('department.add');
 Route::post('/subject/add', [AdminController::class, 'addSubject'])->name('subject.add');
 Route::get('/subject/show', [AdminController::class, 'showSubject'])->name('subject.show');
 

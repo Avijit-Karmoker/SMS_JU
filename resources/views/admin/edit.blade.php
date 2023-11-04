@@ -22,7 +22,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table id="example" class="table table-striped" style="width:100%">
+                    <table id="example" class="table table-bordered" style="width:100%">
                         <thead>
                             <tr>
                                 <th>SL No</th>
@@ -33,40 +33,65 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @php
-                                $previousName = null;
-                                $index = 0;
-                            @endphp --}}
-
-                            @foreach ($subjects as $subject)
+                            @php
+                                $serialNumber = 1;
+                            @endphp
+                            @foreach ($faculties as $faculty)
+                                @foreach($faculty->departments as $index => $department)
                                 <tr>
-                                    {{-- <td>{{ $subject->faculty_name }}</td> --}}
-                                    {{-- @if ($subject->faculty_name !== $previousName)
-                                    <td rowspan="{{ $counts[$subject->faculty_name] }}">{{ $index += 1 }}</td>
-                                        <td rowspan="{{ $counts[$subject->faculty_name] }}">{{ $subject->faculty_name }}</td>
-                                        @php
-                                            $previousName = $subject->faculty_name;
-                                        @endphp
-                                    @endif --}}
-
-                                    <td>{{ $loop->index + 1 }}</td>
-                                    <td>{{ $subject->faculty_name }}</td>
-                                    <td>{{ $subject->department_name }}</td>
+                                    @if($index === 0)
+                                        <td rowspan="{{ count($faculty->departments) }}">
+                                                {{ $serialNumber++ }}
+                                        </td>
+                                        <td rowspan="{{ count($faculty->departments) }}">
+                                                {{ $faculty->name }}
+                                        </td>
+                                    @endif
+                                    <td>{{ $department->name }}</td>
                                     <td>
-                                        <ol>
-                                            @foreach ($allSubjects as $sub)
-                                                @if ($subject->$sub != null)
-                                                    <li>{{ $subject->$sub }}</li>
-                                                @endif
-                                            @endforeach
-                                        </ol>
+                                        @foreach($department->subjects as $subject)
+                                            {{ $subject->name }}
+                                            @if (!$loop->last)
+                                                <br>
+                                            @endif
+                                        @endforeach
                                     </td>
                                     <td><button class="btn btn-danger">Delete</button></td>
                                 </tr>
+                                @endforeach
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $subjects->links('pagination::bootstrap-5') }}
+
+                    {{-- <table border="1">
+                        <thead>
+                            <tr>
+                                <th>Faculty</th>
+                                <th>Department</th>
+                                <th>Subjects</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($faculties as $faculty)
+                                @foreach($faculty->departments as $department)
+                                    <tr>
+                                        <td>{{ $faculty->name }}</td>
+                                        <td>{{ $department->name }}</td>
+                                        <td>
+                                            @foreach($department->subjects as $subject)
+                                                {{ $subject->name }}
+                                                @if (!$loop->last)
+                                                    <br>
+                                                @endif
+                                            @endforeach
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endforeach
+                        </tbody>
+                    </table> --}}
+
+                    {{-- {{ $subjects->links('pagination::bootstrap-5') }}  --}}
                 </div>
             </div>
         </div>
@@ -77,12 +102,13 @@
 @section('footer-script')
 <script>
     // new DataTable('#example');
-    $(document).ready(function() {
-        $('#example').DataTable({
-            "paging": false,
-            "info": false, // Disable DataTables pagination
-            // Other DataTables initialization options...
-        });
-    });
+    // $(document).ready(function() {
+    //     $('#example').DataTable({
+    //         "paging": false,
+    //         "info": false,
+    //         "alert": false // Disable DataTables pagination
+    //         // Other DataTables initialization options...
+    //     });
+    // });
 </script>
 @endsection

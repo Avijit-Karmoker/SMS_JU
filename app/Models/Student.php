@@ -17,4 +17,8 @@ class Student extends Model
         'permanent_address',
         'admission_date',
     ];
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
 }

@@ -31,7 +31,7 @@
 	<link rel="stylesheet" href="{{ asset('dashboard_assets') }}/css/header-colors.css" />
     <link rel="stylesheet" href="sweetalert2.min.css">
     @livewireStyles
-	<title>Rukada - Responsive Bootstrap 5 Admin Template</title>
+
 </head>
 
 <body>
@@ -70,7 +70,7 @@
                             <div class="menu-title">Subject Management</div>
                         </a>
                         <ul>
-                            <li> <a href="{{ route('subject') }}"><i class="bx bx-right-arrow-alt"></i>Choose Subject</a>
+                            <li> <a href="{{ route('subject') }}"><i class="bx bx-right-arrow-alt"></i>Add Faculty/Dept./Sub</a>
                             </li>
                             <li> <a href="{{ route('subject.show') }}"><i class="bx bx-right-arrow-alt"></i>Manage Subject</a>
                             </li>
@@ -623,7 +623,6 @@
 	<script>
 		new PerfectScrollbar('.dashboard-top-countries');
 	</script>
-    <script src="{{ mix('js/app.js') }}"></script>
     @yield('footer-script')
     @livewireScripts
 </body>

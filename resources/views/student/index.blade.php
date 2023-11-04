@@ -18,33 +18,7 @@
     <div class="container">
         <div class="main-body">
             <h2 class="mb-5">Semester Management</h2>
-            <form method="POST" action="{{ route('subject.update') }}">
-                @csrf
-                <div class="row mb-3">
-                    <div class="col-sm-3">
-                        <h6 class="mb-0">Select Semester</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                        <select name="semester" class="form-select">
-                            <option value="first">First Semester</option>
-                            <option value="second">Second Semester</option>
-                            <option value="third">Third Semester</option>
-                            <option value="forth">Forth Semester</option>
-                            <option value="fifth">Fifth Semester</option>
-                            <option value="sixth">Sixth Semester</option>
-                            <option value="seventh">Seventh Semester</option>
-                            <option value="eighth">Eighth Semester</option>
-                        </select>
-                    </div>
-                </div>
-                @livewire('select-subject')
-                <div class="row">
-                    <div class="col-sm-3"></div>
-                    <div class="col-sm-9 text-secondary">
-                        <button type="submit" class="btn btn-primary px-4">Save</button>
-                    </div>
-                </div>
-            </form>
+            @livewire('select-subject')
         </div>
     </div>
 </div>

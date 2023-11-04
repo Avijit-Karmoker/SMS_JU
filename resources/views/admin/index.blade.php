@@ -17,48 +17,184 @@
     <div class="container">
         <div class="main-body">
             <h2 class="mb-5">Semester Management</h2>
-            <form method="POST" action="{{ route('subject.add') }}">
-                @csrf
-                <div class="row mb-3">
-                    <div class="col-sm-3">
-                        <h6 class="mb-0">Facalty Name</h6>
+
+            {{-- faculty from --}}
+            <div class="card">
+                @if(session('faculty'))
+                    <div class="row mt-3">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-8 text-secondary">
+                            <div class="alert border-0 border-start border-5 border-success alert-dismissible fade show py-2">
+                                <div class="d-flex align-items-center">
+                                    <div class="font-35 text-success"><i class="bx bxs-check-circle"></i>
+                                    </div>
+                                    <div class="ms-3">
+                                        <h6 class="mb-0 text-success">Success Alerts</h6>
+                                        <div>A simple success alert—check it out!</div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-sm-9 text-secondary">
-                        <input class="form-control" type="text" name="faculty_name" placeholder="Faculty name">
-                    </div>
+                @endif
+                <div class="card-body">
+                    <form method="POST" action="{{ route('faculty.add') }}">
+                        @csrf
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Faculty Name</h6>
+                            </div>
+                            <div class="col-sm-8 text-secondary">
+                                <input type="text" name="faculty_name" class="form-control"/>
+                            </div>
+                            <div class="col-sm-1 text-secondary">
+                                <button type="submit" class="btn btn-primary px-4">Save</button>
+                            </div>
+                            @error('faculty_name')
+                                <div class="row">
+                                    <div class="col-sm-3"></div>
+                                    <div class="col-sm-8 text-secondary">
+                                        <div class="alert alert-succe border-0 mt-3 bg-danger alert-dismissible fade show">
+                                            <div class="text-white">{{ $message }}</div>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            @enderror
+                        </div>
+                    </form>
                 </div>
-                <div class="row mb-3">
-                    <div class="col-sm-3">
-                        <h6 class="mb-0">Department Name</h6>
+            </div>
+
+            {{-- department form  --}}
+            <div class="card">
+                @if(session('department'))
+                    <div class="row mt-3">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-8 text-secondary">
+                            <div class="alert border-0 border-start border-5 border-success alert-dismissible fade show py-2">
+                                <div class="d-flex align-items-center">
+                                    <div class="font-35 text-success"><i class="bx bxs-check-circle"></i>
+                                    </div>
+                                    <div class="ms-3">
+                                        <h6 class="mb-0 text-success">Success Alerts</h6>
+                                        <div>A simple success alert—check it out!</div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-sm-9 text-secondary">
-                        <input class="form-control" type="text" name="department_name" placeholder="Department name">
-                    </div>
+                @endif
+                <div class="card-body">
+                    <form method="POST" action="{{ route('department.add') }}">
+                        @csrf
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Faculty</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <select name="faculty_id" id="" class="form-select">
+                                    @foreach ($faculties as $faculty)
+                                        <option value="{{ $faculty->id }}">{{ $faculty->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Department Name</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="text" name="department_name" class="form-control"/>
+                            </div>
+                        </div>
+                        @error('faculty_name')
+                            <div class="row">
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-8 text-secondary">
+                                    <div class="alert alert-succe border-0 mt-3 bg-danger alert-dismissible fade show">
+                                        <div class="text-white">{{ $message }}</div>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        @enderror
+                        <div class="row">
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-9 text-secondary">
+                                <button type="submit" class="btn btn-primary px-4">Save Changes</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="row mb-3">
-                    <div class="col-sm-3">
-                        <h6 class="mb-0">Subject 1</h6>
+            </div>
+
+            {{-- subject form  --}}
+            <div class="card">
+                @if(session('subject'))
+                    <div class="row mt-3">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-8 text-secondary">
+                            <div class="alert border-0 border-start border-5 border-success alert-dismissible fade show py-2">
+                                <div class="d-flex align-items-center">
+                                    <div class="font-35 text-success"><i class="bx bxs-check-circle"></i>
+                                    </div>
+                                    <div class="ms-3">
+                                        <h6 class="mb-0 text-success">Success Alerts</h6>
+                                        <div>A simple success alert—check it out!</div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-sm-9 text-secondary">
-                        <input class="form-control" type="text" name="subject_1" placeholder="Subject 1">
-                    </div>
+                @endif
+                <div class="card-body">
+                    <form method="POST" action="{{ route('subject.add') }}">
+                        @csrf
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Faculty</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <select name="department_id" id="" class="form-select">
+                                    @foreach ($departments as $department)
+                                        <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Subjects Name</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="text" name="subjects_name" class="form-control"/>
+                                <span class="text-danger">*</span>Give multiple subjects with comma
+                            </div>
+                        </div>
+                        @error('subjects_name')
+                            <div class="row">
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-8 text-secondary">
+                                    <div class="alert alert-succe border-0 mt-3 bg-danger alert-dismissible fade show">
+                                        <div class="text-white">{{ $message }}</div>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        @enderror
+                        <div class="row">
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-9 text-secondary">
+                                <button type="submit" class="btn btn-primary px-4">Save Changes</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div id="inputContainer" class="row">
-                    <!-- Existing input fields go here -->
-                </div>
-                <div class="row">
-                    <div class="col-sm-3"></div>
-                    <div class="col-sm-9 text-secondary">
-                        <button type="button" class="btn btn-secondary px-4 mb-3" onclick="addInputField()">Add New Subject</button>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3"></div>
-                    <div class="col-sm-9 text-secondary">
-                        <button type="submit" class="btn btn-primary px-4">Save</button>
-                    </div>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
@@ -70,7 +206,7 @@
 <script>
     let fieldCounter = 1; // Counter for incrementing label names
 
-function addInputField() {
+    function addInputField() {
     var container = document.getElementById('inputContainer');
 
     // Increment the field counter
@@ -110,4 +246,5 @@ function addInputField() {
     container.appendChild(inputContainer);
 }
 </script>
+
 @endsection
